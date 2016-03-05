@@ -32,7 +32,7 @@ app.get('/projets',function(req,res){
 	    if(err) {
 	        console.log("Problem with MySQL"+err);
 	      } else {
-	          res.end(JSON.stringify(rows));
+	          res.end(rows);
 	      }
 	  });
 	});
