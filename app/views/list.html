@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="sr-only" for="search">Filter</label>
+                <input id="search" type="text" class="form-control" placeholder="Filter ..." ng-model="search">
+            </div>
+        </form>
+    </div>
+
+
+    <h2 class="page-header">{{projets.length}} projets found</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>code</th>
+                <th>date de debut </th>
+                <th>date du fin</th>
+                <th>description</th>
+                <th>budget totale</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="projet in projets | filter:search">
+                <td>{{projet.id}}</td>
+                <td><a href="#/projet/{{projet.id}}">{{projet.code}}</a></td>
+                <td>{{projet.date_debut}}</td>
+                <td>{{projet.date_fin}}</td>
+                <td>{{projet.description}}</td>
+                <td>{{projet.budget_totale}}</td>
+            </tr>            
+            </tbody>
+        </table>
+        <div class="actions">
+            <a class="btn btn-lg btn-success" ng-href="#/edit/">Ajouter</a>
+        </div>
+    </div>
+</div>
+
+ 
