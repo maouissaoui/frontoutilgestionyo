@@ -1,7 +1,7 @@
 "use strict";
 
 myAdminApp.factory("Projet", function ($http) {
-    var API_URI = '/api/projets';
+       var API_URI = '/projets';
 
     return {
 

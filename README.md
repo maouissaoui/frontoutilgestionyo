@@ -9,7 +9,7 @@ Vous devez créer une application d'administration d'utilisateurs.
 
 #### L'application devra permettre de :
 
-*   Visualiser une liste d'utilisateurs
+*   Visualiser une liste de projets
 *   Faire une recherche par nom d'utilisateur
 *   Visualiser un utilisateur
 *   Modifier un utilisateur
