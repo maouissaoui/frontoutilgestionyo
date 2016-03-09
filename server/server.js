@@ -36,6 +36,11 @@ app.get('/projets',function(req,res){
 	      }
 	  });
 	});
+
+
+
+
+
 app.set('port', 9000);
 app.use(bodyParser());
 // app.use(methodOverride());
@@ -47,6 +52,7 @@ app.use(express.static(path.join(__dirname, '..', 'app')));
 //app.post('/api/projets', projet.addProjet);
 //app.put('/api/projets/:id', projet.updateProjet);
 //app.delete('/api/projets/:id', projet.deleteProjet);
+
 app.get('/api/ressources', ressource.findAllRessouce);
 app.get('/api/ressources/:id', ressource.findByIdRes);
 app.post('/api/ressources', ressource.addRessource);
