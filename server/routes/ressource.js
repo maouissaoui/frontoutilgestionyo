@@ -2,28 +2,28 @@ var ressources = [
 		{
 			"id" : 0,
 			"prestataire" : "code1",
-			"idTjmSocieteProfil" : "1"
+			"tjm" : "1"
 			
 		},
 		{
 			"id" : 1,
 			"prestataire" : "code2",
-			"idTjmSocieteProfil" : "4"
+			"tjm" : "4"
 		},
 		{
 			"id" : 2,
 			"prestataire" : "code3",
-			"idTjmSocieteProfil" : "5"
+			"tjm" : "5"
 		},
 		{
 			"id" : 3,
 			"prestataire" : "code4",
-			"idTjmSocieteProfil" : "3"
+			"tjm" : "3"
 		},
 		{
 			"id" : 4,
 			"prestataire" : "code5",
-			"idTjmSocieteProfil" : "2",
+			"tjm" : "2",
 		} ];
 
 var id = 1;
