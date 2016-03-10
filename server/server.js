@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-  //  , projet = require('./routes/projet')
+  //  , projet = require('./routes/projet') 
     , ressource = require('./routes/ressource')
     , bodyParser = require('body-parser')
     , methodOverride = require('method-override')
@@ -28,16 +28,7 @@ connection.connect(function(error){
 	});
 
 app.use(express.static(__dirname + '/bower_components/angular'));
-//app.get('/projets',function(req,res){
-//	  connection.query("SELECT * from projet",function(err,rows){
-//	    if(err) {
-//	        console.log("Problem with MySQL"+err);
-//	      } else {
-//	          res.end(rows);
-//	      }
-//	  });
-//	 
-//	});
+
 
 app.get('/projets',function(req,res){
 	  connection.query("SELECT * from projet",function(err,rows){
