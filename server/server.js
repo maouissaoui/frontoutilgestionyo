@@ -39,6 +39,18 @@ app.get('/projets',function(req,res){
 	      }
 	  });
 	});
+//inserting into mysql
+app.get('/projets',function(req,res){
+	  connection.query("INSERT INTO projet set ?",function(err,rows){
+	    if(err) {
+	        console.log("Problem with MySQL"+err);
+	      } else {
+	          res.end(JSON.stringify(rows));
+	      }
+	  });
+	});
+
+
 
 app.set('port', 9000);
 
