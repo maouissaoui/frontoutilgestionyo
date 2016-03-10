@@ -27,23 +27,32 @@ connection.connect(function(error){
 	   }
 	});
 
+app.use(express.static(__dirname + '/bower_components/angular'));
+//app.get('/projets',function(req,res){
+//	  connection.query("SELECT * from projet",function(err,rows){
+//	    if(err) {
+//	        console.log("Problem with MySQL"+err);
+//	      } else {
+//	          res.end(rows);
+//	      }
+//	  });
+//	 
+//	});
+
 app.get('/projets',function(req,res){
 	  connection.query("SELECT * from projet",function(err,rows){
 	    if(err) {
 	        console.log("Problem with MySQL"+err);
 	      } else {
-	          res.end(rows);
+	          res.end(JSON.stringify(rows));
 	      }
 	  });
 	});
 
-
-
-
-
 app.set('port', 9000);
-app.use(bodyParser());
-// app.use(methodOverride());
+
+//app.use(bodyParser());
+app.use(methodOverride());
 app.use(express.static(path.join(__dirname, '..', '.tmp')));
 app.use(express.static(path.join(__dirname, '..', 'app')));
 
@@ -60,6 +69,6 @@ app.put('/api/ressources/:id', ressource.updateRessource);
 app.delete('/api/ressources/:id', ressource.deleteRessource);
 module.exports = app;
 
-console.log('Express server listening on port ' + app.get('port'));
+//console.log('Express server listening on port ' + app.get('port'));
 
 
