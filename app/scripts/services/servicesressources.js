@@ -1,7 +1,7 @@
 "use strict";
 
 myAdminApp.factory("Ressource", function ($http) {
-    var API_URI = '/api/ressources';
+    var API_URI = '/ressources';
 
     return {
 

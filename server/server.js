@@ -5,7 +5,7 @@
 
 var express = require('express')
   //  , projet = require('./routes/projet') 
-    , ressource = require('./routes/ressource')
+  //  , ressource = require('./routes/ressource')
     , bodyParser = require('body-parser')
     , methodOverride = require('method-override')
     , path = require('path');
@@ -39,9 +39,9 @@ app.get('/projets',function(req,res){
 	      }
 	  });
 	});
-//inserting into mysql
-app.get('/projets',function(req,res){
-	  connection.query("INSERT INTO projet set ?",function(err,rows){
+
+app.get('/ressources',function(req,res){
+	  connection.query("SELECT * from ressource",function(err,rows){
 	    if(err) {
 	        console.log("Problem with MySQL"+err);
 	      } else {
@@ -49,6 +49,37 @@ app.get('/projets',function(req,res){
 	      }
 	  });
 	});
+
+//app.post('/projets', function (req, res){
+//	  console.log("POST: ");
+//	  connection.connect();
+//	  var errors = req.validationErrors();
+//	    if(errors){
+//	        res.status(422).json(errors);
+//	        return;
+//	    }
+//	 var data ={
+//	  codeProjet = req.body.codeProjet,
+//	  dateDebut = req.body.dateDebut,
+//	  dateFin = req.body.dateFin,
+//	  descProjet = req.body.descProjet,
+//	  budgetTotal = req.body.budgetTotal
+//	 };
+//	  console.log('insert into projet  set ? ",data );
+//	  connection.query("INSERT INTO projet set ? ",data, function(err, rows) { 
+//			//console.log(error);
+//		  if(err){
+//            
+//               console.log("Mysql error, check your query");
+//         }
+//
+//        res.sendStatus(200);
+//
+//      });
+//
+//});
+
+
 
 
 
@@ -65,11 +96,11 @@ app.use(express.static(path.join(__dirname, '..', 'app')));
 //app.put('/api/projets/:id', projet.updateProjet);
 //app.delete('/api/projets/:id', projet.deleteProjet);
 
-app.get('/api/ressources', ressource.findAllRessouce);
-app.get('/api/ressources/:id', ressource.findByIdRes);
-app.post('/api/ressources', ressource.addRessource);
-app.put('/api/ressources/:id', ressource.updateRessource);
-app.delete('/api/ressources/:id', ressource.deleteRessource);
+//app.get('/api/ressources', ressource.findAllRessouce);
+//app.get('/api/ressources/:id', ressource.findByIdRes);
+//app.post('/api/ressources', ressource.addRessource);
+//app.put('/api/ressources/:id', ressource.updateRessource);
+//app.delete('/api/ressources/:id', ressource.deleteRessource);
 module.exports = app;
 
 //console.log('Express server listening on port ' + app.get('port'));
