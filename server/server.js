@@ -10,6 +10,7 @@ var express = require('express')
     , methodOverride = require('method-override')
     , path = require('path');
 var mysql = require("mysql");
+
 var app   = express();
 
 
@@ -18,6 +19,7 @@ var connection = mysql.createConnection({
 	  user     : 'root',
 	  password : 'root',
 	  database : 'outilgestion'
+
 	});
 connection.connect(function(error){
 	  if(error)    {
@@ -40,6 +42,25 @@ app.get('/projets',function(req,res){
 	  });
 	});
 
+//app.get('/:id', function(req,res){
+//
+//    var id = req.params.id;
+//
+//    console.log(id); // => :id instead of value
+//
+//    connection.query('SELECT * FROM projet WHERE idProjet = ?', [id], function (error, results) {        
+//        if(error) {
+//            throw error;
+//        }
+//        else { 
+//            res.end(JSON.stringify(results));
+//        }
+//    });
+//});
+
+
+
+
 app.get('/ressources',function(req,res){
 	  connection.query("SELECT * from ressource",function(err,rows){
 	    if(err) {
@@ -49,38 +70,6 @@ app.get('/ressources',function(req,res){
 	      }
 	  });
 	});
-
-//app.post('/projets', function (req, res){
-//	  console.log("POST: ");
-//	  connection.connect();
-//	  var errors = req.validationErrors();
-//	    if(errors){
-//	        res.status(422).json(errors);
-//	        return;
-//	    }
-//	 var data ={
-//	  codeProjet = req.body.codeProjet,
-//	  dateDebut = req.body.dateDebut,
-//	  dateFin = req.body.dateFin,
-//	  descProjet = req.body.descProjet,
-//	  budgetTotal = req.body.budgetTotal
-//	 };
-//	  console.log('insert into projet  set ? ",data );
-//	  connection.query("INSERT INTO projet set ? ",data, function(err, rows) { 
-//			//console.log(error);
-//		  if(err){
-//            
-//               console.log("Mysql error, check your query");
-//         }
-//
-//        res.sendStatus(200);
-//
-//      });
-//
-//});
-
-
-
 
 
 app.set('port', 9000);
