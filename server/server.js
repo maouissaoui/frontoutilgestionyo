@@ -10,8 +10,13 @@ var express = require('express')
     , methodOverride = require('method-override')
     , path = require('path');
 var mysql = require("mysql");
-
 var app   = express();
+app.use('/', express.static('../app'));
+app.use('/bower_components', express.static('../bower_components/'));
+
+var server = require('http').createServer(app);
+app.jsonParser = bodyParser.json();
+app.urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 
 var connection = mysql.createConnection({
@@ -42,21 +47,55 @@ app.get('/projets',function(req,res){
 	  });
 	});
 
-//app.get('/:id', function(req,res){
-//
-//    var id = req.params.id;
-//
-//    console.log(id); // => :id instead of value
-//
-//    connection.query('SELECT * FROM projet WHERE idProjet = ?', [id], function (error, results) {        
-//        if(error) {
-//            throw error;
-//        }
-//        else { 
-//            res.end(JSON.stringify(results));
-//        }
-//    });
-//});
+app.get('/:id', function(req,res){
+
+    var id = req.params.id;
+
+    console.log(id); // => :id instead of value
+
+    connection.query('SELECT * FROM projet WHERE idProjet = ?', [id], function (error, results) {        
+        if(error) {
+            throw error;
+        }
+        else { 
+            res.end(JSON.stringify(results));
+        }
+    });
+});
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+    // This will change in production since we'll be using the dist folder
+    app.use(express.static(path.join(__dirname, '../projet')));
+    // This covers serving up the index page
+    app.use(express.static(path.join(__dirname, '../projet/.tmp')));
+    app.use(express.static(path.join(__dirname, '../projet/app')));
+
+    // ROUTES BEGIN
+
+    // SIGNUP ROUTE    
+    app.post('/projets', function(req, res){
+
+        var body = req.body;
+
+        var post  = {
+        	codeProjet: body.codeProjet,
+        	dateDebut: body.dateDebut,
+        	dateFin: body.dateFin,
+        	descProjet: body.descProjet,
+        	budgetTotale: body.budgetTotale
+        };
+        connection.query('INSERT INTO projet SET ?', post, function(err,result) {
+            // Neat!
+            res.json({
+                'msg': 'success!'
+            });
+        });
+        console.log(query.sql);
+
+    });
+
 
 
 
