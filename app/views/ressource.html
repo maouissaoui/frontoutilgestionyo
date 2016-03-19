@@ -4,14 +4,14 @@
         <img width="128" height="128" ng-src="images/Icon-user.png"  class="img-rounded">
         <div class="infos">
             <ul>
-                <li><span>id: </span> {{ressource.id}}</li>
+                <li><span>id: </span> {{ressource.idRessource}}</li>
                 <li><span>prestataire: </span>{{ressource.prestataire}}</li>
                 <li><span> Tjm : </span>{{ressource.tjm}}</li>                         
             </ul>
             
         </div>
         <div class="actions">
-            <a class="btn btn-lg btn-success" ng-href="#/editRessource/{{ressource.id}}">Modify</a>
+            <a class="btn btn-lg btn-success" ng-href="#/editRessource/{{ressource.idRessource}}">Modify</a>
             <a class="btn btn-lg btn-success"  ng-click="delete()">Delete</a>
         </div>
     </div>
