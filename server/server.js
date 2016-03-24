@@ -8,19 +8,24 @@ var express = require('express')
 , bodyParser = require('body-parser'), 
 methodOverride = require('method-override'),
 path = require('path');
-// var favicon = require('serve-favicon');
-// var cookieParser = require('cookie-parser');
+
+var server = require('http').createServer(app);
+
+var bodyParser = require('body-parser');
+
 
 var mysql = require("mysql");
 var app = express();
-// app.use('/', express.static('../app'));
+app.use('/', express.static('../app'));
 app.use('/bower_components', express.static('../bower_components/'));
 
 var connection = mysql.createConnection({
 	host : 'localhost',
 	user : 'root',
 	password : 'root',
-	database : 'outilgestion'
+	database : 'outilgestion',
+    multipleStatements: true
+
 
 });
 connection.connect(function(error) {
@@ -49,7 +54,7 @@ app.get('/projet/:id', function(req, res) {
 
 	console.log(id); // => :id instead of value
 
-	connection.query('SELECT * FROM projet WHERE idProjet = ?', [ id ],
+	connection.query('SELECT * FROM projet WHERE idProjet = ?', [ id],
 			function(error, results) {
 
 				if (error) {
@@ -60,8 +65,9 @@ app.get('/projet/:id', function(req, res) {
 			});
 });
 
-
 app.use(express.static(path.join(__dirname, '../projet')));
+
+
 
  app.post('/projets', function(req, res){
 
@@ -88,55 +94,55 @@ app.use(express.static(path.join(__dirname, '../projet')));
  });
  
  //update
- app.put('/projets',function(req,res){
-	    var idProjet = req.body.idProjet;
-	    var codeProjet: body.codeProjet;
-	    var dateDebut: body.dateDebut;
-	    var dateFin: body.dateFin;
-	    var descProjet: body.descProjet;
-	    var budgetTotale: body.budgetTotale;
-	    var data = {
-	        "error":1,
-	        "projets":""
-	    };
-	    if(!!idProjet && !!Bookname && !!Authorname && !!Price){
-	        connection.query("UPDATE projet SET codeProjet=?, dateDebut=?, dateFin=?, descProjet=?, budgetTotale=? WHERE id=?",[Bookname,Authorname,Price,Id],function(err, rows, fields){
-	            if(!!err){
-	                data["projets"] = "Error Updating data";
-	            }else{
-	                data["error"] = 0;
-	                data["projets"] = "Updated Book Successfully";
-	            }
-	            res.json(data);
-	        });
-	    }else{
-	        data["Books"] = "Please provide all required data (i.e : idProjet, codeProjet, dateDebut, dateFin, descProjet,budgetTotale )";
-	        res.json(data);
-	    }
-	});
- 
+// app.put('/projets',function(req,res){
+//	    var idProjet = req.body.idProjet;
+//	    var codeProjet: body.codeProjet;
+//	    var dateDebut: body.dateDebut;
+//	    var dateFin: body.dateFin;
+//	    var descProjet: body.descProjet;
+//	    var budgetTotale: body.budgetTotale;
+//	    var data = {
+//	        "error":1,
+//	        "projets":""
+//	    };
+//	    if(!!idProjet && !!Bookname && !!Authorname && !!Price){
+//	        connection.query("UPDATE projet SET codeProjet=?, dateDebut=?, dateFin=?, descProjet=?, budgetTotale=? WHERE id=?",[Bookname,Authorname,Price,Id],function(err, rows, fields){
+//	            if(!!err){
+//	                data["projets"] = "Error Updating data";
+//	            }else{
+//	                data["error"] = 0;
+//	                data["projets"] = "Updated Book Successfully";
+//	            }
+//	            res.json(data);
+//	        });
+//	    }else{
+//	        data["Books"] = "Please provide all required data (i.e : idProjet, codeProjet, dateDebut, dateFin, descProjet,budgetTotale )";
+//	        res.json(data);
+//	    }
+//	});
+// 
  // delete
- app.delete('/projets',function(req,res){
-	    var idProjet = req.body.idProjet;
-	    var data = {
-	        "error":1,
-	        "projets":""
-	    };
-	    if(!!idProjet){
-	        connection.query("DELETE FROM projet WHERE idProjet=?",[idProjet],function(err, rows, fields){
-	            if(!!err){
-	                data["projets"] = "Error deleting data";
-	            }else{
-	                data["error"] = 0;
-	                data["projets"] = "Delete projet Successfully";
-	            }
-	            res.json(data);
-	        });
-	    }else{
-	        data["projets"] = "Please provide all required data (i.e : idProjet )";
-	        res.json(data);
-	    }
-	});
+// app.delete('/projets',function(req,res){
+//	    var idProjet = req.body.idProjet;
+//	    var data = {
+//	        "error":1,
+//	        "projets":""
+//	    };
+//	    if(!!idProjet){
+//	        connection.query("DELETE FROM projet WHERE idProjet=?",[idProjet],function(err, rows, fields){
+//	            if(!!err){
+//	                data["projets"] = "Error deleting data";
+//	            }else{
+//	                data["error"] = 0;
+//	                data["projets"] = "Delete projet Successfully";
+//	            }
+//	            res.json(data);
+//	        });
+//	    }else{
+//	        data["projets"] = "Please provide all required data (i.e : idProjet )";
+//	        res.json(data);
+//	    }
+//	});
  
  
  
@@ -153,13 +159,13 @@ app.get('/ressources', function(req, res) {
 	});
 });
 
-app.get('/ressources/:id', function(req, res) {
+app.get('/ressource/:id', function(req, res) {
 
 	var id = req.params.id;
 
 	console.log(id); // => :id instead of value
 
-	connection.query('SELECT * FROM ressource WHERE id = ?', [ idProjet ],
+	connection.query('SELECT * FROM ressource WHERE id = ?', [ idRessource ],
 			function(error, results) {
 
 				if (error) {
